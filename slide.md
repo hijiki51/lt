@@ -12,7 +12,7 @@ headingDivider: 2
 class: slides
 -->
 
-# タイトル
+# 3分クッキング: DNS
 
 
 
@@ -20,63 +20,69 @@ class: slides
 _class: title
 -->
 
-### サブタイトル・発表者名など
+### @hijiki51
 
-## サブタイトル
-
-まだつくってないよ
-
-## 白紙
-
-## テキスト
-
-あいうえお
-かきくけこ
-さしすせそ
-
-## 箇条書き
-
-- ぽよぽよ
-- あいうえお
-  - かきくけこ
-
-
-## いろいろ
-
-多分だいたいのMarkdown記法に対応してるよ
-
-```javascript
-console.log("おいす～")
-```
-> は?情緒不安定か?ﾏﾝｺﾞｰうまいぜ
-
-$$
-a+b=c
-$$
-
-## いろいろ2
-
-| a            | b        |
-| ------------ | -------- |
-| あ           | い       |
-| こんな感じで | 書けるよ |
-
-
-## 画像
-
-あんまり凝ったことはできない
-
-![](sample_image/traP.png)
-
-サイズ変えたり横に並べるぐらいならできる
-
-![w:200px](sample_image/traP.png)![w:200px](sample_image/traP.png)
-
-# ![](sample_image/lolico.png) @trapyojo
+# ![](images/icon.JPG) @hijiki51
 
 <!--
 _class: user
 -->
 
-正方形の画像を載せると多分いい感じにしてくれるよ
-それ以外についてはしらないよ
+- 理学院物理学系3年
+- SysAd班 リーダー
+- 3Qはフル単出来ました
+  - 来年落とした必修を回収しないといけないけど
+
+## 作るもの
+
+
+
+
+
+## 材料
+- Bind9導入済みサーバー二台
+  - ISCが開発しているDNSサーバー
+  - DNSに必要なすべての機能を網羅している
+
+- Ubuntuサーバー二台
+
+
+## 材料準備
+- Docker Composeで準備する
+- Docker NerworkでのIPアドレスを固定
+  - Aレコードで使うため
+  - ~~コンテナ名で名前解決すればいいとかいってはいけない~~
+
+## 材料準備
+
+出来上がったものがこちらになります
+
+https://github.com/hijiki51/3-min-dns/blob/main/compose.yaml
+
+
+
+## 親サーバーの設定
+
+- ゾーンの設定
+  - せっかくなのでオリジナルのTLDを使います
+- RRの設定
+  - SOAレコード
+  - 子サーバーのNS,Aレコード、グルーレコード
+  - server1のAレコード
+
+## 親サーバーの設定
+ゾーン設定：https://github.com/hijiki51/3-min-dns/blob/main/root/local
+RR設定：https://github.com/hijiki51/3-min-dns/blob/main/root/hijiki51
+
+
+## 子サーバーの設定
+- ゾーンの設定
+  - `sub.hijiki51`のサブドメインを移譲します
+- RRの設定
+  - 親サーバーと同様に
+
+ゾーン設定：https://github.com/hijiki51/3-min-dns/blob/main/sub/local
+RR設定：https://github.com/hijiki51/3-min-dns/blob/main/sub/sub
+
+
+# 実演
