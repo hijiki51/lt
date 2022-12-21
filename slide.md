@@ -34,7 +34,7 @@ _class: user
   - 来年落とした必修を回収しないといけないけど
 
 ## 作るもの
-
+![](images/infra.drawio.png)
 
 
 
